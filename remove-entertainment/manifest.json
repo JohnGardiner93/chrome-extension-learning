@@ -1,0 +1,15 @@
+{
+  "name": "Entertainment Remover",
+  "description": "Base Level Extension",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_icon": "no-fun.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://news.google.com/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
