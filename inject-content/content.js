@@ -1,3 +1,46 @@
+// --- Condensed Code --- //
+////////////////////////////////////////////
+// Elements
+// Action items table -> Use the strong elements to find
+var tableBody = [...document.querySelectorAll(`Strong`)]
+  .find(function (item) {
+    return item.innerHTML === `Action Items`;
+  })
+  .closest(`tbody`);
+// Action Item Rows
+
+var table = tableBody.closest(`table`);
+var actionItemRows = tableBody.querySelectorAll(`tr`);
+// Make an Array of Action Item Rows and remove
+var newTableRows = [...actionItemRows];
+
+////////////////////////////////////////////
+// Sorting
+// Remove the first two elements from the action items to be sorted (chart title, column headers)
+newTableRows.splice(0, 2);
+// Sort the action item elemnts by the first column in each row (sequence #)
+newTableRows.sort(function (a, b) {
+  return a.children[0].innerHTML - b.children[0].innerHTML;
+});
+
+////////////////////////////////////////////
+// Make a New Table
+var newTableBody = document.createElement(`tbody`);
+// Insert the header elements
+newTableBody.insertAdjacentElement(`beforeend`, actionItemRows[0]);
+newTableBody.insertAdjacentElement(`beforeend`, actionItemRows[1]);
+// Insert the sorted rows
+newTableRows.forEach(function (el) {
+  return newTableBody.insertAdjacentElement(`beforeend`, el);
+});
+
+// Remove old table and insert newly-built tablebody
+tableBody.remove();
+table.insertAdjacentElement(`afterbegin`, newTableBody);
+
+////////////////////////////////////////////
+// Initial Code
+/*
 console.log(`I'm gonna sort your table!`);
 ////////////////////////////////////////////
 // Use the strong elemnts to find the table...
@@ -44,3 +87,4 @@ newTableRows.forEach((el) =>
 // Insert newly-built tablebody
 tableBody.remove();
 table.insertAdjacentElement(`afterbegin`, newTableBody);
+*/
